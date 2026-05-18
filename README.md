@@ -1,7 +1,7 @@
 # AKADEMIX
 
 AKADEMIX adalah aplikasi sistem informasi sekolah berbasis native PHP dengan pola MVC dan database MySQL `akademix`.
-
+Aanjai
 Fitur inti:
 
 - `Admin / TU`: CRUD guru, siswa, orang tua, mata pelajaran, kelas, penempatan siswa, jadwal, tahun ajaran & semester.
