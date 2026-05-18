@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AKADEMIX - Report Card Finalization</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#00201d",
+                        "outline": "#757682",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-primary": "#b6c4ff",
+                        "surface-container-highest": "#e0e3e5",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary": "#1b2b3f",
+                        "on-tertiary-container": "#9dadc6",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#d3e4fe",
+                        "primary": "#00236f",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#444651",
+                        "surface-container": "#eceef0",
+                        "on-secondary-container": "#006f66",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-fixed": "#00164e",
+                        "primary-fixed": "#dce1ff",
+                        "secondary-fixed": "#89f5e7",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "inverse-surface": "#2d3133",
+                        "secondary-container": "#86f2e4",
+                        "tertiary-container": "#314156",
+                        "on-primary-container": "#90a8ff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#006a61",
+                        "on-surface": "#191c1e",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c5c5d3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "primary-container": "#1e3a8a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-primary-fixed-variant": "#264191",
+                        "surface-tint": "#4059aa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "1rem",
+                        "sidebar-width": "280px",
+                        "container-max-width": "1440px",
+                        "margin-mobile": "1rem",
+                        "margin-desktop": "2.5rem",
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "2rem",
+                        "gutter": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .sidebar-active { background-color: #006a61; color: white; border-radius: 0.5rem; }
+    </style>
+</head>
+<body class="flex min-h-screen text-on-surface">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-tertiary flex flex-col py-8 space-y-2 z-50">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-tertiary-fixed">AKADEMIX</h1>
+<p class="text-label-md font-label-md text-on-tertiary-container">Institutional Portal</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 px-6 py-3 text-tertiary-fixed-dim opacity-80 hover:bg-tertiary-container hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-tertiary-fixed-dim opacity-80 hover:bg-tertiary-container hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-label-md font-label-md">Students</span>
+</a>
+<a class="bg-secondary text-on-secondary rounded-lg mx-2 flex items-center gap-4 px-4 py-3 font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-label-md font-label-md">Academic Records</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-tertiary-fixed-dim opacity-80 hover:bg-tertiary-container hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="text-label-md font-label-md">Schedules</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-tertiary-fixed-dim opacity-80 hover:bg-tertiary-container hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="how_to_reg">how_to_reg</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-tertiary-fixed-dim opacity-80 hover:bg-tertiary-container hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<a class="flex items-center gap-4 px-6 py-3 text-tertiary-fixed-dim opacity-80 hover:bg-tertiary-container hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-tertiary-fixed-dim opacity-80 hover:bg-tertiary-container hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[280px] min-h-screen">
+<!-- TopAppBar Component -->
+<header class="bg-surface-bright flex justify-between items-center w-full px-10 h-16 sticky top-0 z-40 border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-8">
+<h2 class="text-headline-md font-headline-md tracking-tight font-bold text-primary">AKADEMIX</h2>
+<nav class="flex h-16">
+<button class="px-4 text-on-surface-variant hover:bg-surface-container-high transition-colors text-body-md font-body-md">Nilai Harian</button>
+<button class="px-4 text-on-surface-variant hover:bg-surface-container-high transition-colors text-body-md font-body-md">Tugas</button>
+<button class="px-4 text-primary font-bold border-b-2 border-primary hover:bg-surface-container-high transition-colors text-body-md font-body-md">Rapor</button>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a female school administrator with a friendly expression. She is wearing corporate attire, and the background is a soft, blurred modern office interior with warm, high-key lighting, maintaining a clean and authoritative institutional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMgtu8543RyHJRL9NbaA4UrXRINLwk3iLCquWpJKT37IBOtEXFwHkeJ8CLZn0sPk_ToDoGibC5uOKxUVis_1M6ddfsSnF6Te03L4HRI69jbx0THYG_1amkHogMc1XKiUq9tEpzf8mvz3P8W4ERdCyTKJ73CXKiJO52QV6OHNInMJ-1EwoYKWdlIXq4V-6kaOQHDfI0fbbyKkFacCSFVLrW1E78IfO2bgOdxeoLnkP08zasT1_2GTIsoxRzmB4dM3FEHMxapGgUk_Y"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-10 max-w-[1440px] mx-auto grid grid-cols-12 gap-gutter">
+<!-- Main Content: Summary Table -->
+<div class="col-span-12 lg:col-span-8 space-y-stack-lg">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-headline-lg font-headline-lg text-primary">Report Card Finalization</h3>
+<p class="text-body-md font-body-md text-outline">Class 10-A | Semester 2, Academic Year 2023/2024</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-lg border border-primary text-primary font-medium hover:bg-primary/5 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+                            Preview Report
+                        </button>
+<button class="px-4 py-2 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
+                            Verify All
+                        </button>
+</div>
+</div>
+<!-- Bento-style Grid for Tables & Data -->
+<div class="bg-white rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_rgba(0,0,0,0.06)] border border-outline-variant overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 text-label-md font-label-md text-outline uppercase tracking-wider">Student Name</th>
+<th class="px-6 py-4 text-label-md font-label-md text-outline uppercase tracking-wider text-center">Pengetahuan</th>
+<th class="px-6 py-4 text-label-md font-label-md text-outline uppercase tracking-wider text-center">Keterampilan</th>
+<th class="px-6 py-4 text-label-md font-label-md text-outline uppercase tracking-wider text-center">Sikap</th>
+<th class="px-6 py-4 text-label-md font-label-md text-outline uppercase tracking-wider">Final Status</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 text-body-md font-bold">Aditiya Pratama</td>
+<td class="px-6 py-4 text-center text-body-md">88</td>
+<td class="px-6 py-4 text-center text-body-md">92</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-md font-bold">A</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="text-body-sm">Ready to Print</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="bg-slate-50/50 hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 text-body-md font-bold">Bunga Citra</td>
+<td class="px-6 py-4 text-center text-body-md">75</td>
+<td class="px-6 py-4 text-center text-body-md">80</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-md font-bold">B</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[18px]" data-icon="pending">pending</span>
+<span class="text-body-sm">Pending</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 text-body-md font-bold">Dimas Setiadi</td>
+<td class="px-6 py-4 text-center text-body-md">94</td>
+<td class="px-6 py-4 text-center text-body-md">95</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-md font-bold">A</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="text-body-sm">Ready to Print</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="bg-slate-50/50 hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 text-body-md font-bold">Eka Putri</td>
+<td class="px-6 py-4 text-center text-body-md">82</td>
+<td class="px-6 py-4 text-center text-body-md">85</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-md font-bold">B</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="text-body-sm">Ready to Print</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 text-body-md font-bold">Fajar Nugroho</td>
+<td class="px-6 py-4 text-center text-body-md">68</td>
+<td class="px-6 py-4 text-center text-body-md">70</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-error-container text-on-error-container rounded-full text-label-md font-bold">C</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[18px]" data-icon="pending">pending</span>
+<span class="text-body-sm">Pending</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="flex justify-between items-center bg-surface-container p-6 rounded-xl border border-outline-variant">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-white rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<p class="text-headline-sm font-headline-sm text-on-surface">Batch Finalization</p>
+<p class="text-body-sm font-body-sm text-outline">Generate all validated student reports into a single PDF document.</p>
+</div>
+</div>
+<button class="px-8 py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all shadow-md">
+                        Export to PDF
+                    </button>
+</div>
+</div>
+<!-- Right Panel -->
+<div class="col-span-12 lg:col-span-4 space-y-stack-md">
+<!-- Finalization Status Card -->
+<div class="bg-white p-6 rounded-xl shadow-sm border border-outline-variant">
+<h4 class="text-label-md font-label-md text-outline uppercase tracking-wider mb-4">Finalization Status</h4>
+<div class="flex items-end justify-between mb-2">
+<span class="text-headline-lg font-headline-lg text-primary">24/24</span>
+<span class="text-secondary font-bold text-body-md">100% Completed</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2 mb-6">
+<div class="bg-secondary h-2 rounded-full w-full"></div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-surface-container-high">
+<span class="text-body-sm text-on-surface-variant">Verified Records</span>
+<span class="text-body-sm font-bold">24</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-container-high">
+<span class="text-body-sm text-on-surface-variant">Incomplete Grade</span>
+<span class="text-body-sm font-bold">0</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-body-sm text-on-surface-variant">Locked for Archive</span>
+<span class="material-symbols-outlined text-secondary" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+</div>
+</div>
+<!-- Export Options Card -->
+<div class="bg-white p-6 rounded-xl shadow-sm border border-outline-variant">
+<h4 class="text-label-md font-label-md text-outline uppercase tracking-wider mb-4">Export Options</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="text-primary focus:ring-primary h-4 w-4" name="export" type="radio"/>
+<div>
+<p class="text-body-md font-bold">Standard PDF</p>
+<p class="text-label-md text-outline">Optimized for A4 printing</p>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="text-primary focus:ring-primary h-4 w-4" name="export" type="radio"/>
+<div>
+<p class="text-body-md font-bold">Detailed Digital (Web)</p>
+<p class="text-label-md text-outline">With interactive links &amp; charts</p>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="text-primary focus:ring-primary h-4 w-4" name="export" type="radio"/>
+<div>
+<p class="text-body-md font-bold">XLS Master Sheet</p>
+<p class="text-label-md text-outline">For institutional archiving</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Archival Guidelines Card -->
+<div class="bg-primary-container/10 p-6 rounded-xl border border-primary-container/20">
+<div class="flex items-center gap-2 mb-3 text-primary">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+<h4 class="text-body-md font-bold">Archival Guidelines</h4>
+</div>
+<ul class="text-body-sm text-on-primary-fixed-variant space-y-2 list-disc pl-5">
+<li>Ensure all teacher comments are finalized.</li>
+<li>Digital signatures will be applied automatically upon export.</li>
+<li>Records are kept in the 'Live' system for 365 days before cold storage.</li>
+</ul>
+</div>
+<!-- Promotion Card/Decorative Element -->
+<div class="relative overflow-hidden rounded-xl bg-tertiary p-6 h-48 flex flex-col justify-end text-white">
+<img alt="Graduation cap" class="absolute inset-0 w-full h-full object-cover opacity-30" data-alt="A cinematic close-up of a graduation mortarboard cap with a golden tassel resting on a polished wooden library table. The lighting is warm and golden-hour inspired, reflecting off the dark wood surface. The overall atmosphere is nostalgic, prestigious, and celebratory, reinforcing the institutional weight of the final report card process." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvBmPj7i8lOruzjElkrsiOB4E5xVq1eWy1JOEgDD60C0RdJlL8Lcp0cOt1La8JEhuBre54krU4V-bxbIlfhll_zcfIv3asbmEtdbMmzk0F6keLr8aONYE6tlwSckgrawb-YioCs-ouZuVhNEgHrEuS5D77DoNFXc1Rk6pTgDj-_ccT9B-8Gjs5sXBsXguuibvduFk1hh5PR_U3zq2NLVFrSzAda4Yp73QPNMGUYxgbKL82XbMrNArrSkGchO0xcgdWIfakYts1Q3w"/>
+<div class="relative z-10">
+<p class="text-headline-sm font-headline-sm">Class of 2024</p>
+<p class="text-body-sm opacity-80">Preparing for the commencement ceremony.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
