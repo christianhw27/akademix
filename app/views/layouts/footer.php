@@ -10,6 +10,20 @@
 </div> <!-- /hero-wrapper -->
 <?php endif; ?>
 <script>
+// ── Dark Mode Toggle ────────────────────────────────
+(function() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+        var html = document.documentElement;
+        var current = html.getAttribute('data-theme') || 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('akademix_theme', next);
+    });
+})();
+
+// ── File Preview ────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[type="file"]').forEach(function(input) {
         input.addEventListener('change', function(e) {
@@ -17,35 +31,22 @@ document.addEventListener('DOMContentLoaded', function() {
             if (existingPreview && existingPreview.classList.contains('file-preview-container')) {
                 existingPreview.remove();
             }
-            
             if (this.files && this.files[0]) {
                 const file = this.files[0];
                 const previewContainer = document.createElement('div');
                 previewContainer.className = 'file-preview-container';
-                previewContainer.style.marginTop = '8px';
-                previewContainer.style.padding = '8px';
-                previewContainer.style.background = '#f8fafc';
-                previewContainer.style.border = '1px dashed #cbd5e1';
-                previewContainer.style.borderRadius = '6px';
-                previewContainer.style.fontSize = '12px';
-                
+                previewContainer.style.cssText = 'margin-top:8px;padding:8px;background:var(--surface-dim);border:1px dashed var(--outline-strong);border-radius:6px;font-size:12px;';
                 if (file.type.startsWith('image/')) {
                     const img = document.createElement('img');
                     img.src = URL.createObjectURL(file);
-                    img.style.maxWidth = '200px';
-                    img.style.maxHeight = '150px';
-                    img.style.display = 'block';
-                    img.style.marginBottom = '6px';
-                    img.style.borderRadius = '4px';
+                    img.style.cssText = 'max-width:200px;max-height:150px;display:block;margin-bottom:6px;border-radius:4px;';
                     img.onload = function() { URL.revokeObjectURL(this.src); }
                     previewContainer.appendChild(img);
                 }
-                
                 const fileInfo = document.createElement('div');
-                fileInfo.style.color = '#475569';
+                fileInfo.style.color = 'var(--on-surface-variant)';
                 fileInfo.innerHTML = `<strong>File terpilih:</strong> ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
                 previewContainer.appendChild(fileInfo);
-                
                 input.parentNode.insertBefore(previewContainer, input.nextSibling);
             }
         });

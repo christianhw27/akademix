@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+ob_start();
 
 require __DIR__ . '/../app/core/helpers.php';
 require __DIR__ . '/../app/core/Database.php';
@@ -60,6 +61,7 @@ $routes = [
         'parent/report' => ['GuardianController', 'report'],
         'parent/attendance' => ['GuardianController', 'attendance'],
         'parent/assignments' => ['GuardianController', 'assignments'],
+        'teacher/attendance/export' => ['TeacherController', 'exportAttendance'],
         'teacher/grades/export' => ['TeacherController', 'exportGrades'],
     ],
     'POST' => [

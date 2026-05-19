@@ -140,7 +140,7 @@ ksort($groupedByGrade);
                             <td><?= e($session['subject_name']) ?></td>
                             <td><?= e($session['year_label']) ?> / <?= e(ucfirst($session['semester'])) ?></td>
                             <td style="text-align: center;">
-                                <a href="<?= e(route_url('teacher/grades/export&classroom_id=' . $selectedClassroomId . '&type=' . urlencode($gradeType) . '&title=' . urlencode($session['title']) . '&subject_id=' . $session['subject_id'])) ?>" class="btn small primary" style="display: inline-flex; align-items: center; gap: 4px;">
+                                <a href="<?= e(base_url('export.php') . '?export_type=grades&classroom_id=' . $selectedClassroomId . '&grade_type=' . urlencode($gradeType) . '&title=' . urlencode($session['title']) . '&subject_id=' . $session['subject_id']) ?>" class="btn small primary" style="display: inline-flex; align-items: center; gap: 4px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                     Ekspor Excel
                                 </a>

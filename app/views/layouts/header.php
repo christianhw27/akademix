@@ -13,7 +13,15 @@ $error = flash('error');
     <title><?= e($pageTitle) ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="<?= e(asset_url('css/app.css')) ?>">
+    <script>
+        // Apply theme before render to avoid flash
+        (function(){
+            var t = localStorage.getItem('akademix_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 <?php if ($user): ?>
@@ -27,8 +35,8 @@ $error = flash('error');
             if ($user['role'] === 'admin') $homeRoute = 'admin';
             ?>
             <a href="<?= e(route_url($homeRoute)) ?>" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px;">
-                <div style="background: #ffffff; border-radius: 8px; padding: 6px; display: inline-flex;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                <div style="background: rgba(255,255,255,0.15); border-radius: 8px; padding: 6px; display: inline-flex;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
                 </div>
                 <div>
                     <div class="sidebar-brand"><span>AKADEMIX</span></div>
@@ -140,14 +148,21 @@ $error = flash('error');
             </div>
 
             <div class="topbar-actions">
+                <!-- Dark Mode Toggle -->
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode" aria-label="Toggle dark mode">
+                    <!-- Moon icon (shown in light mode) -->
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <!-- Sun icon (shown in dark mode) -->
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
                 <details style="position:relative;">
                     <summary style="list-style:none; cursor:pointer; display:flex; align-items:center;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--muted);"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                        <span style="position:absolute; top:-2px; right:-2px; background:#ef4444; width:8px; height:8px; border-radius:50%;"></span>
+                        <span style="position:absolute; top:-2px; right:-2px; background:var(--primary); width:8px; height:8px; border-radius:50%;"></span>
                     </summary>
-                    <div style="position:absolute; right:0; top:calc(100% + 12px); width:300px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; box-shadow:0 10px 25px rgba(0,0,0,0.1); z-index:100;">
-                        <h3 style="margin:0 0 12px 0; font-size:14px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">Notifikasi</h3>
-                        <div style="font-size:13px; color:#475569; padding:8px 0;">Belum ada notifikasi baru.</div>
+                    <div style="position:absolute; right:0; top:calc(100% + 12px); width:300px; background:var(--surface-container); border:1px solid var(--outline); border-radius:16px; padding:16px; box-shadow:var(--shadow-lg); z-index:100;">
+                        <h3 style="margin:0 0 12px 0; font-size:14px; font-weight:700; color:var(--on-surface); border-bottom:1px solid var(--outline); padding-bottom:8px;">Notifikasi</h3>
+                        <div style="font-size:13px; color:var(--muted); padding:8px 0;">Belum ada notifikasi baru.</div>
                     </div>
                 </details>
                 <div class="user-chip">

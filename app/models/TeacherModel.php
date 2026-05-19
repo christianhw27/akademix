@@ -310,16 +310,19 @@ class TeacherModel extends Model
     public function getGradesBySession(int $teacherId, int $classroomId, string $gradeType, string $title, int $subjectId): array
     {
         $stmt = $this->db->prepare('
-            SELECT g.score, g.notes,
+            SELECT COALESCE(g.score, NULL) AS score, 
+                   COALESCE(g.notes, NULL) AS notes,
                    su.full_name AS student_name, st.nis
-            FROM grades g
-            INNER JOIN students st ON st.id = g.student_id
+            FROM classroom_students cs
+            INNER JOIN students st ON st.id = cs.student_id
             INNER JOIN users su ON su.id = st.user_id
-            WHERE g.teacher_id = :teacher_id 
-              AND g.classroom_id = :classroom_id 
+            LEFT JOIN grades g ON g.student_id = cs.student_id
+              AND g.teacher_id = :teacher_id
+              AND g.classroom_id = :classroom_id
               AND g.grade_type = :grade_type
               AND g.title = :title
               AND g.subject_id = :subject_id
+            WHERE cs.classroom_id = :classroom_id2
             ORDER BY su.full_name ASC
         ');
         $stmt->execute([
@@ -328,6 +331,7 @@ class TeacherModel extends Model
             'grade_type' => $gradeType,
             'title' => $title,
             'subject_id' => $subjectId,
+            'classroom_id2' => $classroomId,
         ]);
         return $stmt->fetchAll();
     }

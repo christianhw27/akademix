@@ -291,36 +291,149 @@ class TeacherController extends Controller
             }
         }
 
-        $filename = 'Nilai_' . $className . '_' . $title . '_' . date('Ymd_His') . '.xls';
-
-        header('Content-Type: application/vnd.ms-excel; charset=utf-8');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
-
-        echo '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
-        echo '<head><meta http-equiv="Content-type" content="text/html;charset=utf-8"></head>';
-        echo '<body>';
-        echo '<table border="1">';
-        echo '<tr>';
-        echo '<th style="background-color: #f2f2f2;">No</th>';
-        echo '<th style="background-color: #f2f2f2;">Nama Siswa</th>';
-        echo '<th style="background-color: #f2f2f2;">NIS</th>';
-        echo '<th style="background-color: #f2f2f2;">Nilai</th>';
-        echo '<th style="background-color: #f2f2f2;">Catatan</th>';
-        echo '</tr>';
+        // Build content first
+        $content = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
+        $content .= '<head><meta http-equiv="Content-type" content="text/html;charset=utf-8"></head>';
+        $content .= '<body>';
+        $content .= '<table border="1">';
+        $content .= '<tr>';
+        $content .= '<th style="background-color: #f2f2f2;">No</th>';
+        $content .= '<th style="background-color: #f2f2f2;">Nama Siswa</th>';
+        $content .= '<th style="background-color: #f2f2f2;">NIS</th>';
+        $content .= '<th style="background-color: #f2f2f2;">Nilai</th>';
+        $content .= '<th style="background-color: #f2f2f2;">Catatan</th>';
+        $content .= '</tr>';
 
         $no = 1;
         foreach ($grades as $grade) {
-            echo '<tr>';
-            echo '<td>' . $no++ . '</td>';
-            echo '<td>' . e($grade['student_name']) . '</td>';
-            echo '<td style="mso-number-format:\'@\';">' . e($grade['nis']) . '</td>';
-            echo '<td>' . e((string)$grade['score']) . '</td>';
-            echo '<td>' . e((string)$grade['notes']) . '</td>';
-            echo '</tr>';
+            $content .= '<tr>';
+            $content .= '<td>' . $no++ . '</td>';
+            $content .= '<td>' . e($grade['student_name']) . '</td>';
+            $content .= '<td style="mso-number-format:\'@\';">' . e($grade['nis']) . '</td>';
+            $content .= '<td>' . ($grade['score'] !== null ? e((string)$grade['score']) : '-') . '</td>';
+            $content .= '<td>' . ($grade['notes'] !== null ? e((string)$grade['notes']) : '') . '</td>';
+            $content .= '</tr>';
         }
         
-        echo '</table>';
-        echo '</body></html>';
+        $content .= '</table>';
+        $content .= '</body></html>';
+
+        $rawFilename = 'Nilai_' . $className . '_' . $title . '_' . date('Ymd_His') . '.xls';
+        $filename = preg_replace('/[^A-Za-z0-9_\-.]/', '_', $rawFilename);
+
+        $this->sendExcelDownload($filename, $content);
+    }
+
+    public function exportAttendance(): void
+    {
+        Auth::requireRole('teacher');
+
+        $teacherId = $this->teacherId();
+        $sessionId = (int) $this->request('session_id', 0);
+
+        if (!$sessionId) {
+            flash('error', 'Parameter ekspor tidak lengkap.');
+            $this->redirect('teacher/attendance');
+        }
+
+        // Get session info
+        $sessions = $this->teacherModel->getAttendanceSessions($teacherId);
+        $currentSession = null;
+        foreach ($sessions as $s) {
+            if ((int) $s['id'] === $sessionId) {
+                $currentSession = $s;
+                break;
+            }
+        }
+
+        if (!$currentSession) {
+            flash('error', 'Sesi absensi tidak ditemukan.');
+            $this->redirect('teacher/attendance');
+        }
+
+        $records = $this->teacherModel->getAttendanceRecordsBySession($sessionId);
+
+        // Build content first
+        $content = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
+        $content .= '<head><meta http-equiv="Content-type" content="text/html;charset=utf-8"></head>';
+        $content .= '<body>';
+
+        // Header info
+        $content .= '<table>';
+        $content .= '<tr><td style="font-weight:bold; font-size:14px;" colspan="5">Rekap Absensi</td></tr>';
+        $content .= '<tr><td>Kelas</td><td colspan="4">' . e($currentSession['classroom_name']) . '</td></tr>';
+        $content .= '<tr><td>Mata Pelajaran</td><td colspan="4">' . e($currentSession['subject_name']) . '</td></tr>';
+        $content .= '<tr><td>Tanggal</td><td colspan="4">' . e($currentSession['attendance_date']) . '</td></tr>';
+        $content .= '<tr><td>Catatan</td><td colspan="4">' . e((string) $currentSession['notes']) . '</td></tr>';
+        $content .= '<tr><td colspan="5"></td></tr>';
+        $content .= '</table>';
+
+        // Attendance table
+        $content .= '<table border="1">';
+        $content .= '<tr>';
+        $content .= '<th style="background-color: #f2f2f2;">No</th>';
+        $content .= '<th style="background-color: #f2f2f2;">Nama Siswa</th>';
+        $content .= '<th style="background-color: #f2f2f2;">NIS</th>';
+        $content .= '<th style="background-color: #f2f2f2;">Status</th>';
+        $content .= '<th style="background-color: #f2f2f2;">Keterangan</th>';
+        $content .= '</tr>';
+
+        $no = 1;
+        $statusLabels = ['hadir' => 'Hadir', 'izin' => 'Izin', 'sakit' => 'Sakit', 'alpha' => 'Alfa'];
+        foreach ($records as $record) {
+            $statusLabel = $statusLabels[$record['status']] ?? ucfirst($record['status']);
+            $content .= '<tr>';
+            $content .= '<td>' . $no++ . '</td>';
+            $content .= '<td>' . e($record['student_name']) . '</td>';
+            $content .= '<td style="mso-number-format:\'@\';">' . e($record['nis']) . '</td>';
+            $content .= '<td>' . e($statusLabel) . '</td>';
+            $content .= '<td>' . e((string) ($record['notes'] ?? '')) . '</td>';
+            $content .= '</tr>';
+        }
+
+        // Summary row
+        $content .= '<tr><td colspan="5"></td></tr>';
+        $content .= '<tr>';
+        $content .= '<td colspan="2" style="font-weight:bold;">Ringkasan</td>';
+        $content .= '<td style="color:#16a34a; font-weight:bold;">Hadir: ' . e((string) $currentSession['count_hadir']) . '</td>';
+        $content .= '<td style="color:#3b82f6; font-weight:bold;">Izin: ' . e((string) $currentSession['count_izin']) . '</td>';
+        $content .= '<td style="color:#eab308; font-weight:bold;">Sakit: ' . e((string) $currentSession['count_sakit']) . '</td>';
+        $content .= '</tr>';
+        $content .= '<tr>';
+        $content .= '<td colspan="2"></td>';
+        $content .= '<td style="color:#dc2626; font-weight:bold;">Alfa: ' . e((string) $currentSession['count_alpha']) . '</td>';
+        $content .= '<td style="font-weight:bold;">Total: ' . e((string) $currentSession['total_records']) . '</td>';
+        $content .= '<td></td>';
+        $content .= '</tr>';
+
+        $content .= '</table>';
+        $content .= '</body></html>';
+
+        $rawFilename = 'Absensi_' . $currentSession['classroom_name'] . '_' . $currentSession['subject_name'] . '_' . $currentSession['attendance_date'] . '.xls';
+        $filename = preg_replace('/[^A-Za-z0-9_\-.]/', '_', $rawFilename);
+
+        $this->sendExcelDownload($filename, $content);
+    }
+
+    private function sendExcelDownload(string $filename, string $content): void
+    {
+        // Clear ALL output buffers to ensure no stale output breaks headers
+        while (ob_get_level()) {
+            ob_end_clean();
+        }
+
+        // Remove any previously set headers
+        if (!headers_sent()) {
+            header_remove();
+            header('Content-Type: application/vnd.ms-excel; charset=utf-8');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            header('Content-Length: ' . strlen($content));
+            header('Cache-Control: max-age=0, no-cache, must-revalidate');
+            header('Pragma: public');
+            header('Expires: 0');
+        }
+
+        echo $content;
         exit;
     }
 
