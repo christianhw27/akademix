@@ -27,7 +27,7 @@
                                 <textarea name="content" rows="2" placeholder="Tuliskan jawaban / catatan pengumpulan" required><?= e($assignment['submission_content']) ?></textarea>
                                 
                                 <?= render_file_preview($assignment['submission_attachment'], 'File Tersimpan Saat Ini') ?>
-                                <div style="font-size:11px; color:#64748b; margin-top:4px;">(Pilih file baru untuk mengganti file lama)</div>
+                                <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">(Pilih file baru untuk mengganti file lama)</div>
                                 
                                 <input type="file" name="attachment" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar" style="font-size:12px; padding:4px;">
                                 <button type="submit" class="btn small"><?= $status === 'submitted' ? 'Perbarui Jawaban' : 'Kumpulkan' ?></button>

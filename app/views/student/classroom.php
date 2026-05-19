@@ -25,35 +25,35 @@
     align-items: center;
     gap: 12px;
     padding: 14px 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
-    background: #ffffff;
+    background: var(--bg-card);
     cursor: pointer;
     text-decoration: none;
-    color: #1e293b;
+    color: var(--text-color);
     font-size: 14px;
     font-weight: 600;
     transition: all 0.2s;
 }
 
 .gc-subject-btn:hover {
-    border-color: #93c5fd;
-    background: #eff6ff;
+    border-color: var(--primary);
+    background: var(--surface-raised);
 }
 
 .gc-subject-btn.active {
-    border-color: #3b82f6;
-    background: #eff6ff;
-    color: #1e40af;
-    box-shadow: 0 0 0 1px #3b82f6;
+    border-color: var(--primary);
+    background: var(--surface-raised);
+    color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
 }
 
 .gc-subject-icon {
     width: 40px;
     height: 40px;
     border-radius: 8px;
-    background: #dbeafe;
-    color: #2563eb;
+    background: var(--surface-raised);
+    color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,20 +62,20 @@
 }
 
 .gc-subject-btn.active .gc-subject-icon {
-    background: #3b82f6;
-    color: #ffffff;
+    background: var(--primary);
+    color: var(--surface-container);
 }
 
 .gc-subject-meta {
     font-size: 12px;
     font-weight: 400;
-    color: #64748b;
+    color: var(--text-muted);
     margin-top: 2px;
 }
 
 .gc-content {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 28px;
     min-height: 400px;
@@ -87,7 +87,7 @@
     align-items: center;
     justify-content: center;
     min-height: 350px;
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 15px;
     text-align: center;
     gap: 12px;
@@ -97,14 +97,14 @@
     display: flex;
     gap: 4px;
     margin-bottom: 24px;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .gc-tab {
     padding: 10px 20px;
     font-size: 14px;
     font-weight: 600;
-    color: #64748b;
+    color: var(--text-muted);
     cursor: pointer;
     border-bottom: 2px solid transparent;
     margin-bottom: -2px;
@@ -115,23 +115,23 @@
     border-right: none;
 }
 
-.gc-tab:hover { color: #1e293b; }
+.gc-tab:hover { color: var(--text-color); }
 .gc-tab.active {
-    color: #2563eb;
-    border-bottom-color: #2563eb;
+    color: var(--primary);
+    border-bottom-color: var(--primary);
 }
 
 .gc-item {
     padding: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     margin-bottom: 12px;
     transition: all 0.2s;
 }
 
 .gc-item:hover {
-    border-color: #93c5fd;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .gc-item-header {
@@ -152,25 +152,25 @@
     font-size: 16px;
 }
 
-.gc-item-icon.material { background: #dbeafe; color: #2563eb; }
-.gc-item-icon.assignment { background: #fce7f3; color: #db2777; }
+.gc-item-icon.material { background: var(--surface-raised); color: var(--primary); }
+.gc-item-icon.assignment { background: var(--surface-raised); color: var(--accent); }
 
 .gc-item-title {
     font-weight: 700;
     font-size: 15px;
-    color: #0f172a;
+    color: var(--text-color);
     line-height: 1.4;
 }
 
 .gc-item-meta {
     font-size: 12px;
-    color: #64748b;
+    color: var(--text-muted);
     margin-top: 4px;
 }
 
 .gc-item-body {
     font-size: 13px;
-    color: #475569;
+    color: var(--text-muted);
     line-height: 1.6;
     padding-left: 48px;
 }
@@ -182,10 +182,10 @@
     font-size: 11px;
     font-weight: 600;
 }
-.gc-badge.material { background: #dbeafe; color: #1e40af; }
-.gc-badge.assignment { background: #fce7f3; color: #9d174d; }
-.gc-badge.submitted { background: #dcfce7; color: #166534; }
-.gc-badge.pending { background: #fef9c3; color: #854d0e; }
+.gc-badge.material { background: var(--surface-raised); color: var(--primary); }
+.gc-badge.assignment { background: var(--surface-raised); color: var(--accent); }
+.gc-badge.submitted { background: var(--success); color: #ffffff; }
+.gc-badge.pending { background: var(--warning); color: #ffffff; }
 
 @media (max-width: 768px) {
     .gc-container {
@@ -198,7 +198,7 @@
     <!-- Subject List Sidebar -->
     <div class="gc-sidebar">
         <?php if (empty($subjects)): ?>
-            <div style="padding: 24px; text-align: center; color: #94a3b8; font-size: 13px;">
+            <div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 13px;">
                 Belum ada mata pelajaran.
             </div>
         <?php else: ?>
@@ -221,17 +221,17 @@
     <div class="gc-content">
         <?php if ($selectedSubject === null || !isset($subjects[$selectedSubject])): ?>
             <div class="gc-empty">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--border-color)" stroke-width="1.5">
                     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                 </svg>
-                <div style="font-weight: 600; color: #64748b;">Pilih Mata Pelajaran</div>
+                <div style="font-weight: 600; color: var(--text-muted);">Pilih Mata Pelajaran</div>
                 <div>Klik salah satu mata pelajaran di samping untuk melihat materi dan tugas.</div>
             </div>
         <?php else: ?>
             <?php $subjectData = $subjects[$selectedSubject]; ?>
-            <h2 style="margin: 0 0 4px 0; font-size: 1.3rem; color: #0f172a;"><?= e($selectedSubject) ?></h2>
-            <p style="color: #64748b; font-size: 13px; margin-bottom: 20px;">
+            <h2 style="margin: 0 0 4px 0; font-size: 1.3rem; color: var(--text-color);"><?= e($selectedSubject) ?></h2>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">
                 <?= count($subjectData['materials']) ?> materi · <?= count($subjectData['assignments']) ?> tugas
             </p>
 
@@ -255,7 +255,7 @@
                 ?>
 
                 <?php if (empty($allItems)): ?>
-                    <div style="padding: 40px; text-align: center; color: #94a3b8;">Belum ada konten untuk mata pelajaran ini.</div>
+                    <div style="padding: 40px; text-align: center; color: var(--text-muted);">Belum ada konten untuk mata pelajaran ini.</div>
                 <?php else: ?>
                     <?php foreach ($allItems as $item): ?>
                         <?php if ($item['type'] === 'material'): ?>
@@ -306,17 +306,17 @@
                                         </div>
                                         <?= render_file_preview($a['attachment'], 'Lihat Lampiran Soal/Materi') ?>
                                         
-                                        <div style="background:#f8fafc; padding:16px; border-radius:8px; border:1px solid #e2e8f0; margin-top:16px;">
-                                            <h4 style="margin:0 0 12px 0; font-size:13px; color:#475569;">Form Pengumpulan Tugas</h4>
+                                        <div style="background:var(--bg-body); padding:16px; border-radius:8px; border:1px solid var(--border-color); margin-top:16px;">
+                                            <h4 style="margin:0 0 12px 0; font-size:13px; color:var(--text-muted);">Form Pengumpulan Tugas</h4>
                                             <?php $status = $a['submission_status'] ?: 'belum'; ?>
                                             <form method="post" action="<?= e(route_url('student/assignments/submit')) ?>" class="inline-form" enctype="multipart/form-data" style="display:flex; flex-direction:column; gap:8px;">
                                                 <input type="hidden" name="assignment_id" value="<?= e((string) $a['id']) ?>">
-                                                <textarea name="content" rows="2" placeholder="Tuliskan jawaban / catatan pengumpulan" required style="width:100%; border:1px solid #cbd5e1; border-radius:6px; padding:8px; font-family:inherit; font-size:13px;"><?= e($a['submission_content']) ?></textarea>
+                                                <textarea name="content" rows="2" placeholder="Tuliskan jawaban / catatan pengumpulan" required style="width:100%; border:1px solid var(--border-color); border-radius:6px; padding:8px; font-family:inherit; font-size:13px; background:var(--bg-card); color:var(--text-color);"><?= e($a['submission_content']) ?></textarea>
                                                 
                                                 <?= render_file_preview($a['submission_attachment'], 'File Tersimpan Saat Ini') ?>
-                                                <div style="font-size:11px; color:#64748b; margin-top:4px; margin-bottom: 8px;">(Pilih file baru untuk mengganti file lama)</div>
+                                                <div style="font-size:11px; color:var(--text-muted); margin-top:4px; margin-bottom: 8px;">(Pilih file baru untuk mengganti file lama)</div>
                                                 
-                                                <input type="file" name="attachment" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar" style="font-size:12px; padding:4px;">
+                                                <input type="file" name="attachment" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar" style="font-size:12px; padding:4px; color:var(--text-color);">
                                                 <button type="submit" class="btn small" style="width:max-content;"><?= $status === 'submitted' ? 'Perbarui Jawaban' : 'Kumpulkan Tugas' ?></button>
                                             </form>
                                         </div>

@@ -36,7 +36,7 @@ $error = flash('error');
             ?>
             <a href="<?= e(route_url($homeRoute)) ?>" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px;">
                 <div style="background: rgba(255,255,255,0.15); border-radius: 8px; padding: 6px; display: inline-flex;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
                 </div>
                 <div>
                     <div class="sidebar-brand"><span>AKADEMIX</span></div>

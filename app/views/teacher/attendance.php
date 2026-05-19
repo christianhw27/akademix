@@ -84,22 +84,22 @@
                     <tr>
                         <td>
                             <?= e(format_date($session['attendance_date'])) ?><br>
-                            <small style="color: #64748b;">Pukul <?= e(date('H:i', strtotime($session['created_at']))) ?></small>
+                            <small style="color: var(--muted);">Pukul <?= e(date('H:i', strtotime($session['created_at']))) ?></small>
                         </td>
                         <td><?= e($session['classroom_name']) ?></td>
                         <td><?= e($session['subject_name']) ?></td>
                         <td>
                             <div style="display:flex; gap:8px; font-size:12px;">
-                                <span style="color:#16a34a; font-weight:600;"><?= e((string) $session['count_hadir']) ?> H</span>
-                                <span style="color:#3b82f6; font-weight:600;"><?= e((string) $session['count_izin']) ?> I</span>
-                                <span style="color:#eab308; font-weight:600;"><?= e((string) $session['count_sakit']) ?> S</span>
-                                <span style="color:#dc2626; font-weight:600;"><?= e((string) $session['count_alpha']) ?> A</span>
+                                <span style="color:var(--success); font-weight:600;"><?= e((string) $session['count_hadir']) ?> H</span>
+                                <span style="color:var(--primary); font-weight:600;"><?= e((string) $session['count_izin']) ?> I</span>
+                                <span style="color:var(--warning); font-weight:600;"><?= e((string) $session['count_sakit']) ?> S</span>
+                                <span style="color:var(--danger); font-weight:600;"><?= e((string) $session['count_alpha']) ?> A</span>
                             </div>
                         </td>
                         <td><?= e($session['notes']) ?></td>
                         <td>
                             <div style="display: flex; gap: 6px; align-items: center;">
-                                <a href="<?= e(route_url('teacher/attendance/edit&session_id=' . $session['id'])) ?>" class="btn small" style="text-decoration:none; border: 1px solid #e2e8f0;">✏️ Edit/Detail</a>
+                                <a href="<?= e(route_url('teacher/attendance/edit&session_id=' . $session['id'])) ?>" class="btn small" style="text-decoration:none; border: 1px solid var(--outline);">✏️ Edit/Detail</a>
                                 <a href="<?= e(base_url('export.php') . '?export_type=attendance&session_id=' . $session['id']) ?>" class="btn small primary" style="text-decoration:none; display: inline-flex; align-items: center; gap: 4px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                     Excel

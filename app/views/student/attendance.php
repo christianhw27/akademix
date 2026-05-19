@@ -28,8 +28,8 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
 
 <style>
 .calendar-container {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 24px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -49,23 +49,23 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     text-align: center;
     font-weight: 700;
     font-size: 13px;
-    color: #64748b;
+    color: var(--text-muted);
     padding-bottom: 8px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 8px;
 }
 .calendar-cell {
     min-height: 100px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 8px;
     cursor: pointer;
     transition: all 0.2s;
-    background: #ffffff;
+    background: var(--surface-raised);
     position: relative;
 }
 .calendar-cell:hover:not(.empty):not(.gray) {
-    border-color: #94a3b8;
+    border-color: var(--primary-color);
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     transform: translateY(-2px);
 }
@@ -74,18 +74,18 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     border-color: transparent;
     cursor: default;
 }
-.calendar-cell.gray { background: #f1f5f9; cursor: default; }
-.calendar-cell.green { background: #f0fdf4; border-color: #bbf7d0; }
-.calendar-cell.yellow { background: #fefce8; border-color: #fef08a; }
-.calendar-cell.red { background: #fef2f2; border-color: #fecaca; }
+.calendar-cell.gray { background: var(--bg-body); cursor: default; }
+.calendar-cell.green { background: var(--surface-dim); border-color: var(--success); }
+.calendar-cell.yellow { background: var(--surface-dim); border-color: var(--warning); }
+.calendar-cell.red { background: var(--surface-dim); border-color: var(--danger); }
 
 .calendar-date-num {
     font-weight: 600;
     font-size: 14px;
-    color: #1e293b;
+    color: var(--text-color);
     margin-bottom: 8px;
 }
-.calendar-cell.gray .calendar-date-num { color: #94a3b8; }
+.calendar-cell.gray .calendar-date-num { color: var(--text-muted); }
 
 .calendar-status-text {
     font-size: 11px;
@@ -94,10 +94,10 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     text-align: center;
     margin-top: 16px;
 }
-.calendar-cell.green .calendar-status-text { color: #16a34a; }
-.calendar-cell.yellow .calendar-status-text { color: #ca8a04; }
-.calendar-cell.red .calendar-status-text { color: #dc2626; }
-.calendar-cell.gray .calendar-status-text { color: #94a3b8; }
+.calendar-cell.green .calendar-status-text { color: var(--success); }
+.calendar-cell.yellow .calendar-status-text { color: var(--warning); }
+.calendar-cell.red .calendar-status-text { color: var(--danger); }
+.calendar-cell.gray .calendar-status-text { color: var(--text-muted); }
 
 /* Legend */
 .calendar-legend {
@@ -111,7 +111,7 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     align-items: center;
     gap: 6px;
     font-size: 13px;
-    color: #475569;
+    color: var(--text-muted);
 }
 .legend-dot {
     width: 14px;
@@ -124,7 +124,7 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(15, 23, 42, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -134,7 +134,7 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     display: flex;
 }
 .modal-content {
-    background: #ffffff;
+    background: var(--bg-card);
     border-radius: 12px;
     width: 100%;
     max-width: 520px;
@@ -144,7 +144,7 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
 }
 .modal-header {
     padding: 16px 24px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -157,7 +157,7 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #64748b;
+    color: var(--text-muted);
 }
 </style>
 
@@ -169,10 +169,10 @@ $schedulesByDayJson = htmlspecialchars(json_encode($schedulesByDay), ENT_QUOTES,
     </div>
 
     <div class="calendar-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#bbf7d0; border:1px solid #86efac;"></div> Hadir Penuh</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#fef08a; border:1px solid #fde047;"></div> Hadir Sebagian</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#fecaca; border:1px solid #fca5a5;"></div> Tidak Hadir</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#e2e8f0; border:1px solid #cbd5e1;"></div> Libur / Akhir Pekan</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--success);"></div> Hadir Penuh</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--warning);"></div> Hadir Sebagian</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--danger);"></div> Tidak Hadir</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--bg-body); border:1px solid var(--border-color);"></div> Libur / Akhir Pekan</div>
     </div>
 
     <div class="calendar-grid">
@@ -256,10 +256,10 @@ const schedulesByDay = <?= json_encode($schedulesByDay) ?>;
 
 function getBadgeStyle(status) {
     status = status.toLowerCase();
-    if (status === 'hadir') return 'background:#dcfce7; color:#166534; border:1px solid #bbf7d0;';
-    if (status === 'izin') return 'background:#dbeafe; color:#1e40af; border:1px solid #bfdbfe;';
-    if (status === 'sakit') return 'background:#fef9c3; color:#854d0e; border:1px solid #fef08a;';
-    return 'background:#fee2e2; color:#991b1b; border:1px solid #fecaca;'; // alfa/alpha
+    if (status === 'hadir') return 'background:var(--surface-raised); color:var(--success); border:1px solid var(--success);';
+    if (status === 'izin') return 'background:var(--surface-raised); color:var(--primary); border:1px solid var(--primary);';
+    if (status === 'sakit') return 'background:var(--surface-raised); color:var(--warning); border:1px solid var(--warning);';
+    return 'background:var(--surface-raised); color:var(--danger); border:1px solid var(--danger);'; // alfa/alpha
 }
 
 function openModal(dateStr, dayName, recordsJson) {
@@ -289,7 +289,7 @@ function openModal(dateStr, dayName, recordsJson) {
     let html = '';
     
     if (daySchedules.length === 0) {
-        html = '<div style="text-align:center; padding:24px; color:#64748b;">Tidak ada jadwal pelajaran di hari ini.</div>';
+        html = '<div style="text-align:center; padding:24px; color:var(--text-muted);">Tidak ada jadwal pelajaran di hari ini.</div>';
     } else {
         html += '<div style="display:flex; flex-direction:column; gap:12px;">';
         daySchedules.forEach(s => {
@@ -301,14 +301,14 @@ function openModal(dateStr, dayName, recordsJson) {
             if (status) {
                 statusHtml = `<span style="padding:4px 10px; border-radius:6px; font-size:12px; font-weight:600; ${getBadgeStyle(status)}">${status.toUpperCase()}</span>`;
             } else {
-                statusHtml = '<span style="padding:4px 10px; border-radius:6px; font-size:12px; font-weight:600; background:#f1f5f9; color:#94a3b8; border:1px solid #e2e8f0;">BELUM</span>';
+                statusHtml = '<span style="padding:4px 10px; border-radius:6px; font-size:12px; font-weight:600; background:var(--bg-body); color:var(--text-muted); border:1px solid var(--border-color);">BELUM</span>';
             }
             
             html += `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; border:1px solid #e2e8f0; border-radius:10px; background:#fafafa;">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; border:1px solid var(--border-color); border-radius:10px; background:var(--bg-card);">
                     <div style="flex:1;">
-                        <div style="font-weight:700; font-size:15px; color:#0f172a; margin-bottom:4px;">${s.subject_name}</div>
-                        <div style="font-size:12px; color:#64748b; display:flex; align-items:center; gap:12px;">
+                        <div style="font-weight:700; font-size:15px; color:var(--text-color); margin-bottom:4px;">${s.subject_name}</div>
+                        <div style="font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:12px;">
                             <span>🕐 ${startTime} — ${endTime}</span>
                             <span>👤 ${s.teacher_name}</span>
                         </div>

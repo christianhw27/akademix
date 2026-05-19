@@ -1,4 +1,4 @@
-<section class="hero-wrapper" style="width: 100%; display: flex; align-items: center; justify-content: center; background: #f8fafc; position: relative; overflow: hidden; padding: 24px;">
+<section class="hero-wrapper" style="width: 100%; display: flex; align-items: center; justify-content: center; background: var(--surface); position: relative; overflow: hidden; padding: 24px;">
     
     <!-- Decor element -->
     <div style="position: absolute; top: -100px; left: -100px; width: 400px; height: 400px; background: var(--primary); filter: blur(150px); opacity: 0.05; border-radius: 50%; pointer-events: none;"></div>
@@ -14,7 +14,7 @@
             <h1 style="font-size: 3.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; line-height: 1.1; color: var(--on-surface);">Transformasi Digital<br><span style="color: var(--primary);">Sekolah Modern</span></h1>
             <p class="lead" style="font-size: 1.15rem; margin-bottom: 40px; color: var(--muted); max-width: 90%;">Satu portal terpadu untuk Admin, Guru, Siswa, dan Orang Tua. Akses data nilai, jadwal, dan administrasi akademik dalam satu platform yang elegan.</p>
 
-            <div class="card" style="background: #ffffff; border: 1px solid var(--outline); padding: 20px 24px;">
+            <div class="card" style="background: var(--surface-container); border: 1px solid var(--outline); padding: 20px 24px;">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
                     <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(30,58,138,0.1); display: flex; align-items: center; justify-content: center; color: var(--primary);">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -26,15 +26,15 @@
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                    <div style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--outline);">
+                    <div style="padding: 12px; background: var(--surface-raised); border-radius: 8px; border: 1px solid var(--outline);">
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 4px;">👑 Administrator</div>
                         <code style="background: transparent; padding: 0; font-size: 0.9rem; color: var(--on-surface);">admin</code>
                     </div>
-                    <div style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--outline);">
+                    <div style="padding: 12px; background: var(--surface-raised); border-radius: 8px; border: 1px solid var(--outline);">
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 4px;">👨‍🏫 Guru</div>
                         <code style="background: transparent; padding: 0; font-size: 0.9rem; color: var(--on-surface);">guru.budi</code>
                     </div>
-                    <div style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--outline);">
+                    <div style="padding: 12px; background: var(--surface-raised); border-radius: 8px; border: 1px solid var(--outline);">
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 4px;">🎓 Siswa</div>
                         <code style="background: transparent; padding: 0; font-size: 0.9rem; color: var(--on-surface);">siswa.1</code>
                     </div>

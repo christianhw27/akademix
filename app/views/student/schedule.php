@@ -36,21 +36,21 @@ foreach ($schedules as $s) { $byDay[$s['day_of_week']][] = $s; }
             .schedule-col {
                 flex: 1;
                 min-width: 200px;
-                background: #f8fafc;
+                background: var(--bg-body);
                 border-radius: 12px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid var(--border-color);
                 display: flex;
                 flex-direction: column;
             }
             .schedule-col-header {
                 font-size: 13px;
                 font-weight: 700;
-                color: #475569;
+                color: var(--text-muted);
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
                 padding: 12px;
                 text-align: center;
-                border-bottom: 1px dashed #cbd5e1;
+                border-bottom: 1px dashed var(--border-color);
             }
             .schedule-col-body {
                 padding: 12px;
@@ -59,16 +59,16 @@ foreach ($schedules as $s) { $byDay[$s['day_of_week']][] = $s; }
                 gap: 12px;
             }
             .schedule-card {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-left: 3px solid #3b82f6;
+                background: var(--bg-card-hover);
+                border: 1px solid var(--border-color);
+                border-left: 3px solid var(--primary);
                 border-radius: 8px;
                 padding: 12px;
                 box-shadow: 0 1px 2px rgba(0,0,0,0.05);
             }
             .schedule-time {
                 font-size: 11px;
-                color: #64748b;
+                color: var(--text-muted);
                 display: flex;
                 align-items: center;
                 gap: 4px;
@@ -77,13 +77,13 @@ foreach ($schedules as $s) { $byDay[$s['day_of_week']][] = $s; }
             .schedule-subject {
                 font-size: 13px;
                 font-weight: 700;
-                color: #0f172a;
+                color: var(--text-color);
                 margin-bottom: 4px;
                 line-height: 1.3;
             }
             .schedule-teacher {
                 font-size: 12px;
-                color: #475569;
+                color: var(--text-muted);
                 display: flex;
                 align-items: center;
                 gap: 4px;
@@ -95,7 +95,7 @@ foreach ($schedules as $s) { $byDay[$s['day_of_week']][] = $s; }
                     <div class="schedule-col-header"><?= e($day) ?></div>
                     <div class="schedule-col-body">
                         <?php if (empty($byDay[$day])): ?>
-                            <div style="text-align:center; padding: 20px; font-size:12px; color:#94a3b8; border: 1px dashed #e2e8f0; border-radius: 8px;">
+                            <div style="text-align:center; padding: 20px; font-size:12px; color:var(--text-muted); border: 1px dashed var(--border-color); border-radius: 8px;">
                                 Kosong
                             </div>
                         <?php else: ?>
