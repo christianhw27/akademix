@@ -6,25 +6,11 @@
 </section>
 
 <section class="card">
-    <h2>Pilih Kelas</h2>
-    <form method="get" action="<?= e(route_url('teacher/attendance')) ?>" class="form-grid">
-        <label>Kelas
-            <select name="classroom_id" required>
-                <?php foreach ($classrooms as $classroom): ?>
-                    <option value="<?= e((string) $classroom['id']) ?>" <?= selected($selectedClassroomId, $classroom['id']) ?>><?= e($classroom['name'] . ' - Kelas ' . $classroom['grade_level'] . ' (' . $classroom['year_label'] . ')') ?></option>
-                <?php endforeach; ?>
-            </select>
-        </label>
-        <button type="submit" class="btn" style="width: max-content;">Muat Siswa</button>
-    </form>
-</section>
-
-<section class="card">
     <h2>Input Absensi Manual</h2>
     <form method="post" action="<?= e(route_url('teacher/attendance/save')) ?>">
         <div class="form-grid">
             <label>Kelas
-                <select name="classroom_id" required>
+                <select name="classroom_id" required onchange="window.location.href='<?= e(route_url('teacher/attendance')) ?>&classroom_id=' + this.value">
                     <?php foreach ($classrooms as $classroom): ?>
                         <option value="<?= e((string) $classroom['id']) ?>" <?= selected($selectedClassroomId, $classroom['id']) ?>><?= e($classroom['name'] . ' - Kelas ' . $classroom['grade_level'] . ' (' . $classroom['year_label'] . ')') ?></option>
                     <?php endforeach; ?>

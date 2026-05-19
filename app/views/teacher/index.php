@@ -19,7 +19,7 @@
     <p class="muted" style="margin-top:-10px; margin-bottom:20px; font-size:13px;">Klik pada kartu jadwal untuk langsung mengisi absensi kelas.</p>
 
     <?php if (empty($todaySchedule)): ?>
-        <div style="text-align: center; padding: 32px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; color: #64748b;">
+        <div style="text-align: center; padding: 32px; background: var(--surface-raised); border-radius: 8px; border: 1px dashed var(--outline-strong); color: var(--muted);">
             Tidak ada jadwal mengajar untuk hari ini.
         </div>
     <?php else: ?>
@@ -30,16 +30,16 @@
                 $alreadyTaken = isset($todaySessions[$key]);
                 $sessionId = $todaySessions[$key] ?? 0;
                 ?>
-                <div class="teacher-schedule-card-main" onclick="<?= $alreadyTaken ? "window.location.href='" . e(route_url('teacher/attendance/edit&session_id=' . $sessionId)) . "'" : "openAttendanceModal('modal_attend_" . $i . "')" ?>" style="background: #ffffff; border: 1px solid <?= $alreadyTaken ? '#22c55e' : '#e2e8f0' ?>; border-left: 4px solid <?= $alreadyTaken ? '#22c55e' : '#3b82f6' ?>; border-radius: 8px; padding: 16px; cursor: pointer; transition: all 0.2s; position: relative;">
+                <div class="teacher-schedule-card-main" onclick="<?= $alreadyTaken ? "window.location.href='" . e(route_url('teacher/attendance/edit&session_id=' . $sessionId)) . "'" : "openAttendanceModal('modal_attend_" . $i . "')" ?>" style="background: var(--surface-container); border: 1px solid <?= $alreadyTaken ? '#22c55e' : 'var(--outline)' ?>; border-left: 4px solid <?= $alreadyTaken ? '#22c55e' : 'var(--primary)' ?>; border-radius: 8px; padding: 16px; cursor: pointer; transition: all 0.2s; position: relative;">
                     <?php if ($alreadyTaken): ?>
                         <div style="position: absolute; top: 12px; right: 12px; color: #22c55e; font-size: 20px;">✓</div>
                     <?php endif; ?>
-                    <div style="font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
                         🕐 <?= e(substr($s['start_time'], 0, 5)) ?> — <?= e(substr($s['end_time'], 0, 5)) ?>
                     </div>
-                    <div style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 4px;"><?= e($s['subject_name']) ?></div>
-                    <div style="font-size: 13px; color: #475569;">🏫 Kelas <?= e($s['classroom_name']) ?> · Kelas <?= e((string) $s['grade_level']) ?></div>
-                    <div style="margin-top: 12px; font-size: 12px; font-weight: 600; color: <?= $alreadyTaken ? '#16a34a' : '#3b82f6' ?>;">
+                    <div style="font-size: 16px; font-weight: 700; color: var(--on-surface); margin-bottom: 4px;"><?= e($s['subject_name']) ?></div>
+                    <div style="font-size: 13px; color: var(--on-surface-variant);">🏫 Kelas <?= e($s['classroom_name']) ?> · Kelas <?= e((string) $s['grade_level']) ?></div>
+                    <div style="margin-top: 12px; font-size: 12px; font-weight: 600; color: <?= $alreadyTaken ? '#16a34a' : 'var(--primary)' ?>;">
                         <?= $alreadyTaken ? 'Absensi sudah diisi (Klik untuk edit)' : 'Isi Absensi →' ?>
                     </div>
                 </div>
@@ -47,13 +47,13 @@
                 <!-- Modal for this class/subject -->
                 <?php if (!$alreadyTaken): ?>
                     <div id="modal_attend_<?= $i ?>" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center;">
-                        <div class="modal-content" style="background: #fff; width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; display: flex; flex-direction: column;">
-                            <div style="padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                        <div class="modal-content" style="background: var(--surface-container); width: 100%; max-width: 600px; border-radius: 12px; box-shadow: var(--shadow-lg); max-height: 90vh; display: flex; flex-direction: column;">
+                            <div style="padding: 20px; border-bottom: 1px solid var(--outline); display: flex; justify-content: space-between; align-items: center;">
                                 <div>
                                     <h3 style="margin: 0; font-size: 1.2rem;">Isi Absensi</h3>
-                                    <div style="font-size: 13px; color: #64748b; margin-top: 4px;"><?= e($s['subject_name']) ?> · <?= e($s['classroom_name']) ?> · Hari Ini</div>
+                                    <div style="font-size: 13px; color: var(--muted); margin-top: 4px;"><?= e($s['subject_name']) ?> · <?= e($s['classroom_name']) ?> · Hari Ini</div>
                                 </div>
-                                <button type="button" onclick="closeAttendanceModal('modal_attend_<?= $i ?>')" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #94a3b8;">&times;</button>
+                                <button type="button" onclick="closeAttendanceModal('modal_attend_<?= $i ?>')" style="background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted);">&times;</button>
                             </div>
                             <div style="padding: 20px; overflow-y: auto; flex: 1;">
                                 <form method="post" action="<?= e(route_url('teacher/attendance/save')) ?>">
@@ -138,19 +138,19 @@ $dayOrder = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         .teacher-schedule-col {
             flex: 1;
             min-width: 180px;
-            background: #f8fafc;
+            background: var(--surface-raised);
             border-radius: 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--outline);
         }
         .teacher-schedule-col-header {
             font-size: 12px;
             font-weight: 700;
-            color: #475569;
+            color: var(--on-surface-variant);
             text-transform: uppercase;
             letter-spacing: 0.05em;
             padding: 10px;
             text-align: center;
-            border-bottom: 1px dashed #cbd5e1;
+            border-bottom: 1px dashed var(--outline-strong);
         }
         .teacher-schedule-col-body {
             padding: 10px;
@@ -159,15 +159,15 @@ $dayOrder = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             gap: 8px;
         }
         .teacher-schedule-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-left: 3px solid #8b5cf6;
+            background: var(--surface-container);
+            border: 1px solid var(--outline);
+            border-left: 3px solid var(--primary);
             border-radius: 6px;
             padding: 10px;
             font-size: 12px;
         }
-        .teacher-schedule-card .subj { font-weight: 700; color: #0f172a; margin-bottom: 2px; }
-        .teacher-schedule-card .meta { color: #64748b; }
+        .teacher-schedule-card .subj { font-weight: 700; color: var(--on-surface); margin-bottom: 2px; }
+        .teacher-schedule-card .meta { color: var(--muted); }
     </style>
     <div class="teacher-schedule-grid">
         <?php foreach ($dayOrder as $day): ?>
@@ -175,7 +175,7 @@ $dayOrder = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
                 <div class="teacher-schedule-col-header"><?= e($day) ?></div>
                 <div class="teacher-schedule-col-body">
                     <?php if (empty($schedulesByDay[$day])): ?>
-                        <div style="text-align:center; padding:16px; color:#94a3b8; font-size:11px;">Kosong</div>
+                        <div style="text-align:center; padding:16px; color:var(--muted); font-size:11px;">Kosong</div>
                     <?php else: ?>
                         <?php foreach ($schedulesByDay[$day] as $s): ?>
                             <div class="teacher-schedule-card">
